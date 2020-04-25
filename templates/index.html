@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>营销号生成器</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" id="app">
+    <h1>营销号生成器</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="who">主体</span>
+                </div>
+                <input type="text" class="form-control" placeholder="开水" aria-describedby="who" v-model="who">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="how">怎么样</span>
+                </div>
+                <input type="text" class="form-control" placeholder="不能直接喝" aria-describedby="how" v-model="how">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="fact">另一种说法</span>
+                </div>
+                <input type="text" class="form-control" placeholder="开水太烫了，直接和烫嘴" aria-describedby="fact"
+                       v-model="fact">
+            </div>
+            <div class="mb-3 alert alert-success" role="alert" v-if="success">
+                生成完毕！
+            </div>
+            <div class="mb-3 alert alert-primary" role="alert" v-if="loading">
+                生成 BGM 中……最多需要等待1分钟。
+            </div>
+            <div class="mb-3 progress" v-if="loading">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary" v-on:click="send()">生成 BGM</button>
+            </div>
+            <div class="mb-3">
+                <audio controls v-bind:src=src>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    &emsp;&emsp;{{twho}}{{thow}}是怎么回事呢？{{twho}}相信大家都很熟悉，但是{{twho}}{{thow}}是怎么回事呢，下面就让小编带大家一起了解吧。<br>
+                    &emsp;&emsp;{{twho}}{{thow}}，其实就是{{tfact}}，大家可能会很惊讶{{twho}}怎么会{{thow}}呢？但事实就是这样，小编也感到非常惊讶。<br>
+                    &emsp;&emsp;这就是关于{{twho}}{{thow}}的事情了，大家有什么想法呢，欢迎在评论区告诉小编一起讨论哦！
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            who: null,
+            how: null,
+            fact: null,
+            src: '',
+            loading: false,
+            success: false
+        },
+        computed: {
+            twho: function () {
+                return this.who ? this.who : '开水'
+            },
+            thow: function () {
+                return this.how ? this.how : '不能直接喝'
+            },
+            tfact: function () {
+                return this.fact ? this.fact : '开水'
+            },
+        },
+        methods: {
+            send: function () {
+                this.loading = true;
+                this.success = false;
+                axios
+                    .get(`/generate?what=${this.twho}&how=${this.thow}&fact=${this.tfact}`)
+                    .then(response => {
+                        this.src = response.data;
+                        this.loading = false;
+                        this.success = true;
+                    })
+
+            }
+        }
+    });
+</script>
+</body>
+</html>
