@@ -27,7 +27,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="fact">另一种说法</span>
                 </div>
-                <input type="text" class="form-control" placeholder="开水太烫了，直接和烫嘴" aria-describedby="fact"
+                <input type="text" class="form-control" placeholder="开水太烫了，直接喝烫嘴" aria-describedby="fact"
                        v-model="fact">
             </div>
             <div class="mb-3 alert alert-success" role="alert" v-if="success">
@@ -86,7 +86,7 @@
                 return this.how ? this.how : '不能直接喝'
             },
             tfact: function () {
-                return this.fact ? this.fact : '开水'
+                return this.fact ? this.fact : '开水太烫了，直接喝烫嘴'
             },
         },
         methods: {
