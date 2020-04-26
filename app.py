@@ -4,10 +4,10 @@ from pydub import AudioSegment
 import base64
 import os
 from flask import Flask, render_template, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "https://market.kaitohh.com"}})
+allow_origin = ["https://market.kaitohh.com", "http://market.kaitohh.com"]
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
@@ -18,6 +18,7 @@ def hello_world():
 
 
 @app.route('/generate')
+@cross_origin(origins=allow_origin)
 def generate():
     what = request.args.get('what')
     how = request.args.get('how')
@@ -35,6 +36,7 @@ def generate():
 
 
 @app.route('/ping')
+@cross_origin(origins=allow_origin)
 def ping():
     return '', 204
 
