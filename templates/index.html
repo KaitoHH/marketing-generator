@@ -81,7 +81,7 @@
                 <button type="button" class="btn btn-primary" v-on:click="send()" :disabled="loading">生成 BGM</button>
             </div>
             <div class="mb-3">
-                <audio controls v-bind:src=src>
+                <audio controls v-bind:src=src v-bind:title="twho + thow">
                     Your browser does not support the
                     <code>audio</code> element.
                 </audio>
@@ -103,7 +103,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
