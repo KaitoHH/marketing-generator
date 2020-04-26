@@ -7,7 +7,7 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "market.kaitohh.com"}})
+cors = CORS(app, resources={r"/*": {"origins": "https://market.kaitohh.com"}})
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
