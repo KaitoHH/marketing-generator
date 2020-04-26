@@ -3,9 +3,11 @@ from util import gen_text
 from pydub import AudioSegment
 import base64
 import os
-from flask import Flask, render_template, send_file, request
+from flask import Flask, render_template, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "market.kaitohh.com"}})
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
@@ -30,6 +32,11 @@ def generate():
     os.remove(name)
     src = b'data:audio/mpeg;base64,' + enc
     return src
+
+
+@app.route('/ping')
+def ping():
+    return '', 204
 
 
 if __name__ == '__main__':

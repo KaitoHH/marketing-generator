@@ -99,7 +99,7 @@
                 this.loading = true;
                 this.success = false;
                 axios
-                    .get(`/generate?what=${this.twho}&how=${this.thow}&fact=${this.tfact}`)
+                    .get(`https://api-market.kaitohh.com/generate?what=${this.twho}&how=${this.thow}&fact=${this.tfact}`)
                     .then(response => {
                         this.src = response.data;
                         this.loading = false;
