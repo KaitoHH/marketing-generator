@@ -1,8 +1,9 @@
+import os
+import base64
 from gtts import gTTS
 from util import gen_text
 from pydub import AudioSegment
-import base64
-import os
+from datetime import date
 from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 
@@ -14,7 +15,7 @@ app.jinja_env.variable_end_string = ']]'
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('index.html', copyright_year=date.today().year)
 
 
 @app.route('/generate')
