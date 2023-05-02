@@ -1,5 +1,5 @@
 gTTS==2.2.3
-Flask==1.1.2
+Flask==2.2.5
 pydub==0.25.1
 gunicorn==20.1.0
 flask-cors==3.0.10
